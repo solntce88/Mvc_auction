@@ -1,0 +1,41 @@
+﻿@model Mvc_auction.Models.LogOnModel
+
+@Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+@using (Html.BeginForm("LogOn","Account"))
+{
+   @* @if (Request.IsAuthenticated)
+    {
+        <text>Welcome to auction,<strong>@User.Identity.Name</strong>!</text>
+    }
+    else
+    {*@
+    <div>
+        <fieldset>
+            <legend>Please enter your user name and password</legend>
+            <label class="editor-label">
+                @Html.LabelFor(Model.UserName)
+            </label>
+            <div class="editor-field">
+                @Html.TextBoxFor(Model.UserName)
+                @Html.ValidationMessageFor(Model.UserName)
+            </div>
+            <label class="editor-label">
+                @Html.LabelFor(m => m.Password)
+            </label>
+            <div class="editor-field">
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <label class="editor-label">
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe)
+            </label>
+            <p>
+                <input type="submit" value="Log On" />
+            </p>
+        </fieldset>
+        @Html.ActionLink("Register", "Register") if you don't have an account.<br />
+        @Html.ActionLink("Restore password", "Restore_Password"),if you've foggotten it.<br />
+    </div>
+    
+}

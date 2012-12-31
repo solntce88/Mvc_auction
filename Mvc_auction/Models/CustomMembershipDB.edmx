@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Mvc_auction.Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="Mvc_auctionModelsStoreContainer">
+          <EntitySet Name="Role" EntityType="Mvc_auction.Models.Store.Role" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserInRole" EntityType="Mvc_auction.Models.Store.UserInRole" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="Mvc_auction.Models.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="R_3" Association="Mvc_auction.Models.Store.R_3">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserInRole" EntitySet="UserInRole" />
+          </AssociationSet>
+          <AssociationSet Name="R_4" Association="Mvc_auction.Models.Store.R_4">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserInRole" EntitySet="UserInRole" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="UserInRole">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" />
+          <Property Name="mail" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" Nullable="false" MaxLength="120" />
+          <Property Name="passwordSalt" Type="nvarchar" Nullable="false" MaxLength="120" />
+          <Property Name="userName" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="createdDate" Type="datetime" />
+          <Property Name="modifyedDate" Type="datetime" />
+          <Property Name="newMail" Type="varchar" MaxLength="50" />
+          <Property Name="isActivated" Type="bit" />
+          <Property Name="isLockedOut" Type="bit" />
+          <Property Name="lastLockedOutDate" Type="datetime" />
+          <Property Name="lastLoginDate" Type="datetime" />
+          <Property Name="comments" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="R_3">
+          <End Role="Users" Type="Mvc_auction.Models.Store.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserInRole" Type="Mvc_auction.Models.Store.UserInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="UserInRole">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_4">
+          <End Role="Role" Type="Mvc_auction.Models.Store.Role" Multiplicity="1" />
+          <End Role="UserInRole" Type="Mvc_auction.Models.Store.UserInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="UserInRole">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Mvc_auction.Models" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="CustomMembershipDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Mvc_auction.Models.User" />
+          <EntitySet Name="Roles" EntityType="Mvc_auction.Models.Role" />
+          <AssociationSet Name="UserInRole" Association="Mvc_auction.Models.UserInRole">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="mail" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="120" Unicode="true" FixedLength="false" />
+          <Property Name="passwordSalt" Type="String" Nullable="false" MaxLength="120" Unicode="true" FixedLength="false" />
+          <Property Name="userName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="createdDate" Type="DateTime" />
+          <Property Name="modifyedDate" Type="DateTime" />
+          <Property Name="newMail" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="isActivated" Type="Boolean" />
+          <Property Name="isLockedOut" Type="Boolean" />
+          <Property Name="lastLockedOutDate" Type="DateTime" />
+          <Property Name="lastLoginDate" Type="DateTime" />
+          <Property Name="comments" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Roles" Relationship="Mvc_auction.Models.UserInRole" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Type="Int32" Name="role_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Mvc_auction.Models.UserInRole" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <Association Name="UserInRole">
+          <End Type="Mvc_auction.Models.User" Role="User" Multiplicity="*" />
+          <End Type="Mvc_auction.Models.Role" Role="Role" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Mvc_auctionModelsStoreContainer" CdmEntityContainer="CustomMembershipDB">
+          <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="Mvc_auction.Models.User"><MappingFragment StoreEntitySet="Users">
+            <ScalarProperty Name="user_id" ColumnName="user_id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+            <ScalarProperty Name="lastName" ColumnName="lastName" />
+            <ScalarProperty Name="mail" ColumnName="mail" />
+            <ScalarProperty Name="password" ColumnName="password" />
+            <ScalarProperty Name="passwordSalt" ColumnName="passwordSalt" />
+            <ScalarProperty Name="userName" ColumnName="userName" />
+            <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+            <ScalarProperty Name="modifyedDate" ColumnName="modifyedDate" />
+            <ScalarProperty Name="newMail" ColumnName="newMail" />
+            <ScalarProperty Name="isActivated" ColumnName="isActivated" />
+            <ScalarProperty Name="isLockedOut" ColumnName="isLockedOut" />
+            <ScalarProperty Name="lastLockedOutDate" ColumnName="lastLockedOutDate" />
+            <ScalarProperty Name="lastLoginDate" ColumnName="lastLoginDate" />
+            <ScalarProperty Name="comments" ColumnName="comments" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Mvc_auction.Models.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserInRole" TypeName="Mvc_auction.Models.UserInRole" StoreEntitySet="UserInRole">
+            <EndProperty Name="Role">
+              <ScalarProperty Name="role_id" ColumnName="role_id" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="user_id" ColumnName="user_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="CustomMembershipDB" ZoomLevel="59">
+        <EntityTypeShape EntityType="Mvc_auction.Models.User" Width="1.5" PointX="0.75" PointY="0.75" Height="3.9033007812499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Mvc_auction.Models.Role" Width="1.5" PointX="3" PointY="2" Height="1.5956835937499996" />
+        <AssociationConnector Association="Mvc_auction.Models.UserInRole" >
+          <ConnectorPoint PointX="2.25" PointY="2.797841796875" />
+          <ConnectorPoint PointX="3" PointY="2.797841796875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

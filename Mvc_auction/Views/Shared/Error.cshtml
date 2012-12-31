@@ -1,0 +1,14 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+
+<h2>
+    Sorry, an error occurred while processing your request.
+</h2>
+<span>
+        Sorry! There is error at our page<br />
+        Text error: @ViewData.Model.Exception.Message
+</span>

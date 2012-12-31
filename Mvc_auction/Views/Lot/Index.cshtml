@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Mvc_auction.Models.Lot>
+
+@{
+    ViewBag.Title = "Index of lot";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lots at our auction</h2>
+@section Category{
+<h2>Categories</h2>
+<ul>
+
+</ul>
+}
+
+@foreach (var item in Model)
+{
+    @Html.Partial("_LotPartial", item);
+}

@@ -1,0 +1,30 @@
+﻿@model Mvc_auction.Models.Lot
+<div class="post">
+    <h2 class="title">
+        @Html.ActionLink(Model.Name, "Details", new { id = Model.Id })
+    </h2>
+    <p class="meta">
+        Posted by <a href="#">@Html.DisplayFor(modelItem => Model.Owner_id)</a>
+        @Html.ActionLink("Details", "Details", new { id = Model.Id })
+    </p>
+    <div class="entry">
+        <p>
+            <img src=@Html.DisplayFor(modelItem => Model.Picture) width="200" alt="" class="alignleft border" />
+        </p>
+        <p>
+            Describtion: @Html.DisplayFor(modelItem => Model.Description)
+        </p>
+        <p>
+            Current cost: @Html.DisplayFor(modelItem => Model.Price)</p>
+        <p>
+        </p>
+         @if (User.IsInRole("Admin")){         
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        </p>
+        <p>
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+        </p>
+         }
+    </div>
+</div>

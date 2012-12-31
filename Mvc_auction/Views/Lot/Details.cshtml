@@ -1,0 +1,106 @@
+﻿@model Mvc_auction.Models.LotEditModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section script{
+    <script language='javascript' type="text/javascript">
+
+        function startTime() {
+            // var date = new Date();
+            //
+            var tempDate = date;
+            var days = parseInt(tempDate / (24 * 3600));
+            tempDate = tempDate - days * 24 * 3600;
+            var hours = parseInt(tempDate / 3600);
+            tempDate = tempDate - hours * 3600;
+            var minutes = parseInt(tempDate / 60);
+            tempDate = tempDate - minutes * 60;
+            var seconds = tempDate;
+
+            if (hours < 10) hours = "0" + hours;
+            if (minutes < 10) minutes = "0" + minutes;
+            if (seconds < 10) seconds = "0" + seconds;
+            if (days > 0)
+                document.getElementById("time").innerHTML = days + " days " + hours + ":" + minutes + ":" + seconds;
+            else
+                document.getElementById("time").innerHTML = hours + ":" + minutes + ":" + seconds;
+
+            if (date > 0) {
+                date = date - 1;
+                setTimeout(startTime, 1000);
+            }
+        }
+    </script>
+}
+<h2>
+    Details of @Html.DisplayFor(model => model.Name)</h2>
+@using (Html.BeginForm("Details", "Lot", FormMethod.Post))
+{
+    <fieldset>
+        <div class="post">
+            <h2 class="title">
+                @Html.DisplayFor(modelItem => Model.Name)
+            </h2>
+            <p class="meta">
+                Posted by <a href="#">@Html.DisplayFor(modelItem => Model.Owner_id)</a>
+            </p>
+            <div class="entry">
+                <p>
+                    <img src=@Html.DisplayFor(modelItem => Model.Picture) width="500"  alt="" class="alignleft border" />
+                </p>
+                <p>
+                    <h3>
+                        Time until end of auction: <span id="time"></span>
+                    </h3>
+                    <br />
+                    <h3>
+                        Describtion:</h3>
+                    @Html.DisplayFor(modelItem => Model.Description)
+                </p>
+                <p>
+                    <h3>
+                        Current cost:</h3>
+                    @Html.DisplayFor(modelItem => Model.Price)
+                    <br />
+                </p>
+                <div>
+                    @if ((Request.IsAuthenticated) && (!User.IsInRole("Admin")))
+                    {
+                        <p>
+                            Make your rate<br />
+                            @Html.EditorFor(model => model.Price)
+                            @Html.ValidationMessageFor(model => model.Price)
+                        </p>
+                        <p>
+                            <input type="submit" id="InputPrice" value="Make rate" />
+                        </p>
+                        <h4>
+                            @ViewBag.PriceValid
+                        </h4>
+                    }
+                </div>
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.StartTime)
+                @Html.HiddenFor(model => model.DateEnd)
+                @Html.HiddenFor(model => model.Category_id)
+            </div>
+        </div>
+    </fieldset>
+    <p>
+        @if (User.IsInRole("Admin"))
+        {    
+            <p>
+                @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            </p>
+        }
+        @Html.ActionLink("Back to List", "Index", "Home")
+    </p>
+
+        //запуск начала отсчета
+    <script type="text/javascript">
+    date = @ViewBag.Ticks;
+    startTime();
+    </script>
+}

@@ -1,0 +1,15 @@
+﻿@*@model IEnumerable<Mvc_auction.Models.Lot>*@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+<h2>@ViewBag.Title</h2>
+@if (ViewBag.Status != null)
+{<h4>
+    @ViewBag.Status
+    </h4>
+}
+@Html.Action("Index", "Lot")
+<p>
+</p>
+<div style="clear: both;">
+</div>

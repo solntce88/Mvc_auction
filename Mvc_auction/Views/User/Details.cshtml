@@ -1,0 +1,121 @@
+﻿@model Mvc_auction.Models.User
+@*@model  Mvc_auction.Models.UserDetailsModel*@
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    Describing @Html.DisplayFor(model => model.userName)</h2>
+<fieldset>
+    @Html.HiddenFor(model => model.user_id)
+    <table>
+        <thead>
+            <th rowspan="2">
+                @Html.DisplayFor(model => model.userName)
+            </th>
+        </thead>
+        <tr>
+            <td>
+                <label class="display-label">
+                    @Html.LabelFor(model => model.name)</label>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.name)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="display-label">
+                    @Html.LabelFor(model => model.lastName)</label>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.lastName)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="display-label">
+                    @Html.LabelFor(model => model.mail)</label>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.mail)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="display-label">
+                    @Html.LabelFor(model => model.createdDate) </label>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.createdDate)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="display-label">
+                    Date of modifing</label>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.modifyedDate)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    Activated</div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.isActivated)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    Locked</div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.isLockedOut)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    Date of last lock out</div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.lastLockedOutDate)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    Comments</div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.comments)
+                </div>
+            </td>
+        </tr>
+    </table>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.user_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

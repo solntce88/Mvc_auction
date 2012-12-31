@@ -1,0 +1,91 @@
+﻿@model Mvc_auction.Models.User
+@{
+    ViewBag.Title = "Edit users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>
+    Edit @Html.DisplayFor(model => model.userName)</h2>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+@using (Html.BeginForm("Edit","User"))
+{
+    @Html.ValidationSummary(true,"Please correct:")
+    <fieldset>
+        <legend>User: @Html.DisplayFor(model => model.userName)</legend>
+        @Html.HiddenFor(model => model.user_id)
+        <table>
+            <tr>
+                <td>
+                    <label class="editor-label">
+                        @Html.LabelFor(model => model.name)
+                    </label>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.name)
+                        @Html.ValidationMessageFor(model => model.name)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="editor-label">
+                        @Html.LabelFor(model => model.lastName)
+                    </label>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.lastName)
+                        @Html.ValidationMessageFor(model => model.lastName)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="editor-label">
+                        @Html.LabelFor(model => model.mail)
+                    </label>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.mail)
+                        @Html.ValidationMessageFor(model => model.mail)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="editor-label">
+                        @Html.LabelFor(model => model.comments)
+                    </label>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.comments)
+                        @Html.ValidationMessageFor(model => model.comments)
+                    </div>
+                </td>
+                <tr>
+                  <td>
+                    <label class="editor-label">
+                       @Html.LabelFor(model => model.Roles)
+                    </label>
+                </td>
+                <td>
+                    <div class="editor-field">                  
+                      
+                        <input type="text" value=@ViewBag.Roles />
+                       
+                    </div>
+                </td>
+                </tr>
+            </tr>
+        </table>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
