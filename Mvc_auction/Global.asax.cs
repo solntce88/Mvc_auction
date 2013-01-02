@@ -58,7 +58,7 @@ namespace Mvc_auction
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-        /*   Thread check = new Thread(MailChecker.CheckAndSend);            
+           Thread check = new Thread(MailChecker.CheckAndSend);            
             check.Priority = ThreadPriority.AboveNormal;
             check.IsBackground = true;
             check.Name = "MailChecker";
@@ -67,7 +67,7 @@ namespace Mvc_auction
                 check.Start();
                 Thread.Sleep(TimeSpan.FromMinutes(5));
             }
-          */ 
+           
            
         }
     }
